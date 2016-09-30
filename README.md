@@ -1,6 +1,12 @@
 # ImageZero ROS image\_transport implementation
 
-This repository contains the following catkin packages:
+ImageZero is a fast, lossless compression algorithm for 24-bit color photographic
+images developed by (Christopher Feck)[christoph@maxiom.de].  This repository
+repackages it as a catkin package, has a package that implements convenience
+functions for manipulating ROS images, and has a package that implements a ROS
+image\_transport plugin that uses it.
+
+Catkin packages in this repository include:
 
 ## imagezero
 
