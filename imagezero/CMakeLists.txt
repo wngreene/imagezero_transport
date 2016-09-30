@@ -1,21 +1,42 @@
-project(ImageZero)
+cmake_minimum_required(VERSION 2.8.3)
 
-cmake_minimum_required(VERSION 2.6)
+project(imagezero)
 
-set(CMAKE_BUILD_TYPE "Release")
+find_package(catkin REQUIRED)
+
+catkin_package(INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+)
 
 set(iz_SRCS
-    file.cpp
-    libiz.cpp
-    main.cpp
-    portableimage.cpp
-    table.cpp
+    src/file.cpp
+    src/libiz.cpp
+    src/portableimage.cpp
+    src/table.cpp
 )
+
+include_directories(include ${catkin_INCLUDE_DIRS})
 
 add_definitions(-DHAVE_MMAP)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmmx -mtune=corei7-avx -Winline -W -Wall -fomit-frame-pointer -fno-rtti -fno-exceptions")
 set(CMAKE_EXE_LINKER_FLAGS "-Wl,-O1,-s,--no-export-dynamic")
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -mmmx -mtune=atom -Winline -W -Wall -fomit-frame-pointer -fno-rtti -fno-exceptions")
 
-add_executable(iz ${iz_SRCS})
+add_executable(image_zero
+  ${iz_SRCS} 
+  src/main.cpp
+  )
 
+add_library(${PROJECT_NAME} 
+  ${iz_SRCS}
+  )
+
+install(TARGETS ${PROJECT_NAME} image_zero
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)

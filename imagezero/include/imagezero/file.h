@@ -1,36 +1,47 @@
-#ifndef FILE_H
-#define FILE_H 1
+#ifndef IZ_FILE_H
+#define IZ_FILE_H 1
 
 #include <cstddef>
 
-class InputFile
+namespace IZ
 {
-public:
-    explicit InputFile(const char *filename);
+  class InputFile
+  {
+  public:
+    explicit InputFile(const char* filename);
+
     ~InputFile();
 
     bool isReadable() const;
-    const unsigned char *data() const;
+
+    const unsigned char* data() const;
+
     size_t dataSize() const;
 
-private:
+  private:
     class Private;
-    Private * const d;
-};
 
-class OutputFile
-{
-public:
-    explicit OutputFile(const char *filename);
+    Private* const d;
+  };
+
+  class OutputFile
+  {
+  public:
+    explicit OutputFile(const char* filename);
+
     ~OutputFile();
 
     bool isWritable() const;
-    unsigned char *prepareData(size_t maxSize);
-    void commitData(unsigned char *data, size_t size);
 
-private:
+    unsigned char* prepareData(size_t maxSize);
+
+    void commitData(unsigned char* data, size_t size);
+
+  private:
     class Private;
-    Private * const d;
-};
+
+    Private* const d;
+  };
+}
 
 #endif

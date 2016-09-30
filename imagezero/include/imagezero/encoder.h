@@ -65,7 +65,7 @@ public:
     void encodeImageSize(const Image<> &im) {
         int w = im.width() - 1;
         int h = im.height() - 1;
-        int b = ::numBits(w | h);
+        int b = IZ::numBits(w | h);
         this->writeBits(b, 4);
         this->writeBits(w, b);
         this->writeBits(h, b);
