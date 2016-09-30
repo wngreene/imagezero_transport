@@ -2,19 +2,19 @@
 #include <cstdlib>
 #include <cstring>
 
-#include "libiz.h"
-#include "portableimage.h"
-#include "file.h"
+#include <imagezero/libiz.h>
+#include <imagezero/portableimage.h>
+#include <imagezero/file.h>
 
 static void decodeIZ(const char *infilename, const char *outfilename)
 {
-    PortableImage pi;
-    InputFile infile(infilename);
+    IZ::PortableImage pi;
+    IZ::InputFile infile(infilename);
     if (!infile.isReadable()) {
         perror("Cannot open input file");
         exit(EXIT_FAILURE);
     }
-    OutputFile outfile(outfilename);
+    IZ::OutputFile outfile(outfilename);
     if (!outfile.isWritable()) {
         perror("Cannot open output file");
         exit(EXIT_FAILURE);
@@ -36,13 +36,13 @@ static void decodeIZ(const char *infilename, const char *outfilename)
 
 static void encodeIZ(const char *infilename, const char *outfilename)
 {
-    PortableImage pi;
-    InputFile infile(infilename);
+    IZ::PortableImage pi;
+    IZ::InputFile infile(infilename);
     if (!infile.isReadable()) {
         perror("Cannot open input file");
         exit(EXIT_FAILURE);
     }
-    OutputFile outfile(outfilename);
+    IZ::OutputFile outfile(outfilename);
     if (!outfile.isWritable()) {
         perror("Cannot open output file");
         exit(EXIT_FAILURE);
