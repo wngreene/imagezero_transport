@@ -2,8 +2,8 @@
 Changelog for package imagezero
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.4 (2017-09-29)
+------------------
 * Add documentation; build on Lunar (`#12 <https://github.com/pjreed/imagezero_transport/issues/12>`_)
 * Contributors: P. J. Reed
 
