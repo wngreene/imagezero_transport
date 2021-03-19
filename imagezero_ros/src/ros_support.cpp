@@ -78,7 +78,6 @@ namespace IZ
     params.push_back(cv::IMWRITE_PXM_BINARY);
 #else
     params.push_back(CV_IMWRITE_PXM_BINARY);
-#error "Unsupported OpenCV version."
 #endif
 
     params.push_back(1);
@@ -200,7 +199,11 @@ namespace IZ
     // Decode color/mono image
     try
     {
+#if CV_MAJOR_VERSION >= 3
+      cv_ptr->image = cv::imdecode(cv::Mat(ppm_data), cv::IMREAD_COLOR);
+#else
       cv_ptr->image = cv::imdecode(cv::Mat(ppm_data), CV_LOAD_IMAGE_COLOR);
+#endif
 
       // Assign image encoding string
       const size_t split_pos = compressed->format.find(';');
