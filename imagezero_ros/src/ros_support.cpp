@@ -35,6 +35,10 @@
 #include <ros/ros.h>
 #include <sensor_msgs/image_encodings.h>
 
+#if CV_MAJOR_VERSION >= 3
+#include <opencv2/imgcodecs.hpp>
+#endif
+
 using namespace cv;
 using namespace std;
 
@@ -70,7 +74,13 @@ namespace IZ
     // Bit depth of image encoding
     int bitDepth = enc::bitDepth(image.encoding);
 
+#if CV_MAJOR_VERSION >= 3
+    params.push_back(cv::IMWRITE_PXM_BINARY);
+#else
     params.push_back(CV_IMWRITE_PXM_BINARY);
+#error "Unsupported OpenCV version."
+#endif
+
     params.push_back(1);
 
     // Update ros message format header
